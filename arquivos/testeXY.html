@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no">  
+<link href="http://code.jquery.com/mobile/latest/jquery.mobile.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://code.jquery.com/mobile/latest/jquery.mobile.js"></script> 
+<title>padrao</title>
+<style type="text/css">
+* {margin: 0;padding: 0;border: 0;}
+.display {
+	width: 100%;
+	background-color: white;
+	height:100%;
+}
+.bola {
+	width: 32px;
+	height: 32px;
+	background-color: red;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -16px;
+  border-radius: 16px;
+}
+</style>
+</head>
+<body>
+<div data-theme="a" data-role="header">
+    <button data-role="button" data-transition="turn" data-icon="refresh"
+    data-iconpos="left" class="ui-btn-right" id="PageRefresh" onclick="window.location.reload();">
+      :)
+    </button>
+    <a data-role="button" data-rel="back" data-transition="slide" href="#page1"
+    data-icon="home" data-iconpos="left" class="ui-btn-left">
+      Índice
+    </a>
+    <h3>
+      Teste XY
+    </h3>
+</div>
+<div data-role="content">
+	<div class="display">
+		<div class="bola"></div>
+	</div>	
+</div> 
+<script type="text/javascript">
+
+    var y = 50;
+    var x = 50;
+
+if (window.DeviceOrientationEvent){
+  //ok
+  window.addEventListener("deviceorientation", function(event){
+    //img.style.webkitTransform = "rotateZ("+event.alpha+"deg)";
+
+    // X
+    if (event.beta > 0){
+    	y = y + 1;
+    	$('.bola').css('top', y+"%");
+    } else if (event.beta < 0){
+    	y = y - 1;
+    	$('.bola').css('top', y+"%");
+    } else {
+    	y = y;
+    	$('.bola').css('top', y+"%");
+    }
+
+    // X
+    if (event.gamma > 0){
+    	x = x + 1;
+    	$('.bola').css('left', x+"%");
+    } else if (event.gamma < 0){
+    	x = x - 1;
+    	$('.bola').css('left', x+"%");
+    } else {
+    	x = x;
+    	$('.bola').css('left', x+"%");
+    }
+
+
+  }, false);
+
+
+} else {
+  alert("Ops, seu browser é meio desorientado! :(");
+  img.src = "http://cdn1.iconfinder.com/data/icons/bloggers-1-to-7-vol-PNG/512/emoticon_sad.png";
+}
+document.addEventListener('touchstart', function(event) {
+  //alert();
+}, false);
+</script>  
+</body>
+</html>

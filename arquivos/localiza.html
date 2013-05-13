@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no">  
+<link href="http://code.jquery.com/mobile/latest/jquery.mobile.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://code.jquery.com/mobile/latest/jquery.mobile.js"></script>
+<meta charset=utf-8 />
+<title>Localiza</title>
+
+<style type="text/css">
+div > h4 {margin: 2px 0;}
+</style>
+
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+  <div data-theme="a" data-role="header">
+    <button data-role="button" data-transition="turn" data-icon="refresh"
+    data-iconpos="left" class="ui-btn-right" id="PageRefresh" onclick="window.location.reload();">
+      :)
+    </button>
+    <a data-role="button" data-rel="back" data-transition="slide" href="#page1"
+    data-icon="home" data-iconpos="left" class="ui-btn-left">
+      Índice
+    </a>
+    <h3>
+      Localiza
+    </h3>
+  </div>
+  <div data-role="content">
+    <h4 id="aplha" class="alpha">
+      Alpha
+    </h4>
+    <h4 class="beta">
+      Beta
+    </h4>
+    <h4 class="gamma">
+      Gamma
+    </h4>
+    <div data-role="collapsible-set">
+      <div data-role="collapsible" data-collapsed="true">
+        <h3>
+          Mapa
+        </h3>
+        <label for="textinput1">
+          Endereço
+        </label>
+        <input name="ender" id="textinput1" placeholder="Campo Maior - PI" value=""
+      type="text" data-mini="true">
+        <input type="submit" data-icon="search" data-iconpos="left" value="Buscar" data-mini="true" id="buscar">
+        <img src="http://maps.googleapis.com/maps/api/staticmap?center=Campo Maior - pi&zoom=14&size=288x200&
+markers=Campo Maior&amp;color:blue%7Clabel:S%7C11211%7C11206%7C11222&sensor=true" width="288" height="200" id="mapa" />
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+if (window.DeviceOrientationEvent){
+  //ok
+  window.addEventListener("deviceorientation", function(event){
+    //img.style.webkitTransform = "rotateZ("+event.alpha+"deg)";
+    $('.alpha').text('Alpha: '+event.alpha);
+    $('.beta').text('Beta: '+event.beta);
+    $('.gamma').text('Gamma: '+event.gamma);
+  }, false);
+} else {
+  alert("Ops, seu browser é meio desorientado! :(");
+  img.src = "http://cdn1.iconfinder.com/data/icons/bloggers-1-to-7-vol-PNG/512/emoticon_sad.png";
+}
+
+document.addEventListener('touchstart', function(event) {
+  //alert();
+}, false);
+
+$('#PageRefresh').addEventListener('touchstart', function(event) { 
+  window.location.reload();
+});
+
+</script>
+<script>
+var mapa = document.getElementById('mapa');
+
+$('#buscar').click(function(){
+  var cidade = $('#textinput1').val();
+  mapa.src = "http://maps.googleapis.com/maps/api/staticmap?center="+cidade+"&zoom=14&size=288x200&markers="+cidade+"&amp;color:blue%7Clabel:S%7C11211%7C11206%7C11222&sensor=true";
+});
+</script>
+</body>
+</html>
